@@ -1,13 +1,11 @@
 #include "SOSH_Parser.h"
 
-
-ASTNode* SOSH_Parser::parse() {
+SOSH_ASTNode* SOSH_Parser::parse() {
     std::vector<SOSH_Token> tokens = lexer.tokenize();
     return parseExpressionOrFunction(tokens);
 };
 
-
-ASTNode* SOSH_Parser::parseExpressionOrFunction(const std::vector<SOSH_Token>& tokens) {
+SOSH_ASTNode* SOSH_Parser::parseExpressionOrFunction(const std::vector<SOSH_Token>& tokens) {
     const SOSH_Token& token = tokens[currentPosition];
     if (token.GetType() == Token_t::SOSH_FUNCTION_NAME) {
         currentPosition++;
@@ -38,15 +36,15 @@ ASTNode* SOSH_Parser::parseExpressionOrFunction(const std::vector<SOSH_Token>& t
         };
 
         SOSH_Function_Base* shellfind = shell.FindFunction(token.GetValue<std::string>());
-        ASTNode* node = new ASTShellFunctionNode(token.GetValue<std::string>(), arguments, shellfind);
+        SOSH_ASTNode* node = new ASTShellFunctionNode(token.GetValue<std::string>(), arguments, shellfind);
         return node;
     } else {
         return parseExpression(tokens);
     };
 };
 
-ASTNode* SOSH_Parser::parseExpression(const std::vector<SOSH_Token>& tokens) {
-    ASTNode* node = parseTerm(tokens);
+SOSH_ASTNode* SOSH_Parser::parseExpression(const std::vector<SOSH_Token>& tokens) {
+    SOSH_ASTNode* node = parseTerm(tokens);
 
     while (currentPosition < tokens.size()) {
         const SOSH_Token& token = tokens[currentPosition];
@@ -55,15 +53,15 @@ ASTNode* SOSH_Parser::parseExpression(const std::vector<SOSH_Token>& tokens) {
             break;
 
         currentPosition++;
-        ASTNode* right = parseTerm(tokens);
+        SOSH_ASTNode* right = parseTerm(tokens);
         node = new BinaryOperatorNode(token.GetValue<std::string>()[0], node, right);
     };
 
     return node;
 };
 
-ASTNode* SOSH_Parser::parseTerm(const std::vector<SOSH_Token>& tokens) {
-    ASTNode* node = parseFactor(tokens);
+SOSH_ASTNode* SOSH_Parser::parseTerm(const std::vector<SOSH_Token>& tokens) {
+    SOSH_ASTNode* node = parseFactor(tokens);
 
     while (currentPosition < tokens.size()) {
         const SOSH_Token& token = tokens[currentPosition];
@@ -72,14 +70,14 @@ ASTNode* SOSH_Parser::parseTerm(const std::vector<SOSH_Token>& tokens) {
             break;
 
         currentPosition++;
-        ASTNode* right = parseFactor(tokens);
+        SOSH_ASTNode* right = parseFactor(tokens);
         node = new BinaryOperatorNode(token.GetValue<std::string>()[0], node, right);
     };
 
     return node;
 };
 
-ASTNode* SOSH_Parser::parseFactor(const std::vector<SOSH_Token>& tokens) {
+SOSH_ASTNode* SOSH_Parser::parseFactor(const std::vector<SOSH_Token>& tokens) {
     const SOSH_Token& token = tokens[currentPosition];
 
     if (token.GetType() == Token_t::SOSH_INT || token.GetType() == Token_t::SOSH_FLOAT) {
@@ -99,7 +97,7 @@ ASTNode* SOSH_Parser::parseFactor(const std::vector<SOSH_Token>& tokens) {
 
     if (token.GetType() == Token_t::SOSH_DELIMITER && token.GetValue<std::string>() == "(") {
         currentPosition++;
-        ASTNode* node = parseExpression(tokens);
+        SOSH_ASTNode* node = parseExpression(tokens);
 
         if (currentPosition >= tokens.size() || tokens[currentPosition].GetType() != Token_t::SOSH_DELIMITER || tokens[currentPosition].GetValue<std::string>() != ")") {
             throw std::runtime_error("Mismatched parentheses");

@@ -1,14 +1,7 @@
 #ifndef SOSH_SHELL_H
 #define SOSH_SHELL_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <regex>
-#include <sstream>
-
 #include "SOSH_Function.h"
-
 
 /**
  * @file SOSH_Shell.h
@@ -22,11 +15,7 @@
  * отображения функций в рамках данной оболочки.
  */
 class SOSH_Shell {
-private:
-    std::vector<std::reference_wrapper<SOSH_Function_Base>> funcs_pool; // Пул функций, хранящихся в оболочке.
-    std::string name; // Имя оболочки.
 public:
-
 	/**
      * @brief Конструктор по умолчанию для класса SOSH_Shell.
      */
@@ -69,6 +58,10 @@ public:
      * @return Имя оболочки.
      */
     std::string GetName(); 
+
+private:
+    std::vector<std::reference_wrapper<SOSH_Function_Base>> funcs_pool; // Пул функций, хранящихся в оболочке.
+    std::string name; // Имя оболочки.
 };
 
 #endif // SOSH_SHELL_H

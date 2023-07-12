@@ -1,7 +1,6 @@
 #include "SOSH_Lexer.h"
 
-
-std::vector<SOSH_Token> Lexer::tokenize() {
+std::vector<SOSH_Token> SOSH_Lexer::tokenize() {
     std::vector<SOSH_Token> tokens;
     while (currentPosition < code.length()) {
         if (isWhitespace(code[currentPosition])) {
@@ -50,30 +49,30 @@ std::vector<SOSH_Token> Lexer::tokenize() {
     return tokens;
 };
 
-bool Lexer::isWhitespace(char c) {
+bool SOSH_Lexer::isWhitespace(char c) {
     return c == ' ' || c == '\t' || c == '\n';
 };
 
-bool Lexer::isAlpha(char c) {
+bool SOSH_Lexer::isAlpha(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
 };
 
-bool Lexer::isDigit(char c) {
+bool SOSH_Lexer::isDigit(char c) {
     return c >= '0' && c <= '9';
 };
 
-bool Lexer::isOperator(char c) {
+bool SOSH_Lexer::isOperator(char c) {
     return c == '+' || c == '-' || c == '*' || c == '/' || c == '%' ||
             c == '=' || c == '!' || c == '<' || c == '>' || c == '&' ||
             c == '|' || c == '^';
 };
 
-bool Lexer::isDelimiter(char c) {
+bool SOSH_Lexer::isDelimiter(char c) {
     return c == '(' || c == ')' || c == '{' || c == '}' || c == '[' ||
             c == ']' || c == ';' || c == ',';
 };
 
-SOSH_Token Lexer::parseIdentifierOrKeyword() {
+SOSH_Token SOSH_Lexer::parseIdentifierOrKeyword() {
     std::string lexeme;
     while (currentPosition < code.length() && (isAlpha(code[currentPosition]) || isDigit(code[currentPosition]))) {
         lexeme += code[currentPosition];
@@ -102,7 +101,7 @@ SOSH_Token Lexer::parseIdentifierOrKeyword() {
     return SOSH_Token(type, lexeme);
 };
 
-SOSH_Token Lexer::parseNumber() {
+SOSH_Token SOSH_Lexer::parseNumber() {
     std::string lexeme;
     bool hasDecimal = false;
     bool hasExponent = false;
@@ -131,7 +130,7 @@ SOSH_Token Lexer::parseNumber() {
     return SOSH_Token(type, lexeme);
 };
 
-SOSH_Token Lexer::parseString() {
+SOSH_Token SOSH_Lexer::parseString() {
     std::string lexeme;
     //lexeme += code[currentPosition];  // Add the opening double quote
     currentPosition++;
@@ -152,7 +151,7 @@ SOSH_Token Lexer::parseString() {
     return SOSH_Token(Token_t::SOSH_STRING, lexeme);
 };
 
-SOSH_Token Lexer::parseCharacter() {
+SOSH_Token SOSH_Lexer::parseCharacter() {
     std::string lexeme;
     lexeme += code[currentPosition];  // Add the opening single quote
     currentPosition++;
@@ -176,7 +175,7 @@ SOSH_Token Lexer::parseCharacter() {
     return SOSH_Token(Token_t::SOSH_CHAR, lexeme);
 };
 
-SOSH_Token Lexer::parseOperator() {
+SOSH_Token SOSH_Lexer::parseOperator() {
     std::string lexeme;
     lexeme += code[currentPosition];
     currentPosition++;
@@ -190,7 +189,7 @@ SOSH_Token Lexer::parseOperator() {
     return SOSH_Token(Token_t::SOSH_OPERATOR, lexeme);
 };
 
-SOSH_Token Lexer::parseDelimiter() {
+SOSH_Token SOSH_Lexer::parseDelimiter() {
     std::string lexeme;
     lexeme += code[currentPosition];
     currentPosition++;
@@ -198,7 +197,7 @@ SOSH_Token Lexer::parseDelimiter() {
     return SOSH_Token(Token_t::SOSH_DELIMITER, lexeme);
 };
 
-void Lexer::parseComment() {
+void SOSH_Lexer::parseComment() {
     while (currentPosition < code.length() && code[currentPosition] != '\n') {
         currentPosition++;
     };

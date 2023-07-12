@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <variant>
-
 
 /**
  * @file SOSH_Token.h
@@ -59,9 +57,6 @@ const std::string token_names[] = {
  * @brief Класс, представляющий токен.
  */
 class SOSH_Token {
-private:
-    Token_t type; 
-    std::string lexeme; 
 public:
 	
 	/**
@@ -107,6 +102,10 @@ public:
      * @return Значение токена в типе std::string.
      */
     template<> std::string GetValue<std::string>() const;
+
+private:
+    Token_t type; // Тип токена
+    std::string lexeme; //  Значение токена
 };
 
 template<typename T> 

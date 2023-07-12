@@ -96,7 +96,7 @@ int main() {
             continue;
         };
 
-        result = Interpreter::evaluate(input, ShapeGenerator);
+        result = SOSH_Interpreter::evaluate(input, ShapeGenerator);
     };
 
     return 0;

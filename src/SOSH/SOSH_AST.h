@@ -1,32 +1,23 @@
 #ifndef SOSH_AST_H
 #define SOSH_AST_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <stack>
-#include <stdexcept>
-
 #include "SOSH_Function.h"
 
-
 /**
- * @file ASTNode.h
- * @brief Заголовочный файл для класса ASTNode
+ * @file SOSH_ASTNode.h
+ * @brief Заголовочный файл для класса SOSH_ASTNode
  */
 
 /**
- * @class ASTNode
+ * @class SOSH_ASTNode
  * @brief Базовый абстрактный класс для узла абстрактного синтаксического дерева (Abstract Syntax Tree - AST)
  */
-class ASTNode {
+class SOSH_ASTNode {
 public:
     /**
      * @brief Виртуальный деструктор
      */
-    virtual ~ASTNode() {}
+    virtual ~SOSH_ASTNode() {}
 
     /**
      * @brief Выполняет вычисление значения узла
@@ -39,7 +30,7 @@ public:
  * @class NumberNode
  * @brief Класс узла, представляющего числовое значение
  */
-class NumberNode : public ASTNode {
+class NumberNode : public SOSH_ASTNode {
 public:
     /**
      * @brief Конструктор класса NumberNode
@@ -61,7 +52,7 @@ private:
  * @class BinaryOperatorNode
  * @brief Класс узла, представляющего бинарный оператор
  */
-class BinaryOperatorNode : public ASTNode {
+class BinaryOperatorNode : public SOSH_ASTNode {
 public:
     /**
      * @brief Конструктор класса BinaryOperatorNode
@@ -69,7 +60,7 @@ public:
      * @param left Левый операнд
      * @param right Правый операнд
      */
-    BinaryOperatorNode(char op, ASTNode* left, ASTNode* right) : op(op), left(left), right(right) {}
+    BinaryOperatorNode(char op, SOSH_ASTNode* left, SOSH_ASTNode* right) : op(op), left(left), right(right) {}
 
     /**
      * @brief Деструктор класса BinaryOperatorNode
@@ -87,15 +78,15 @@ public:
 
 private:
     char op; /**< Оператор */
-    ASTNode* left; /**< Левый операнд */
-    ASTNode* right; /**< Правый операнд */
+    SOSH_ASTNode* left; /**< Левый операнд */
+    SOSH_ASTNode* right; /**< Правый операнд */
 };
 
 /**
  * @class ASTShellFunctionNode
  * @brief Класс узла, представляющего функцию в оболочке AST
  */
-class ASTShellFunctionNode : public ASTNode {
+class ASTShellFunctionNode : public SOSH_ASTNode {
 public:
     /**
      * @brief Конструктор класса ASTShellFunctionNode

@@ -12,7 +12,6 @@
 
 #include "SOSH_Token.h"
 
-
 /**
  * @file SOSH_Function.h
  * @brief Объявление класса SOSH_Function_Base

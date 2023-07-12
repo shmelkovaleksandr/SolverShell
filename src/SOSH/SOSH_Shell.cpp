@@ -1,6 +1,3 @@
-#ifndef SOSH_SHELL_CPP
-#define SOSH_SHELL_CPP
-
 #include "SOSH_Shell.h"
 
 bool SOSH_Shell::AddFunction(SOSH_Function_Base &f) {
@@ -24,5 +21,3 @@ std::vector<std::reference_wrapper<SOSH_Function_Base>> SOSH_Shell::ListFunction
 std::string SOSH_Shell::GetName() {
     return name;
 };
-
-#endif // SOSH_SHELL_CPP

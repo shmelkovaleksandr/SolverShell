@@ -1,11 +1,10 @@
-#include <gtest/gtest.h>
-#include "SOSH/SOSH_Interpreter.h"
+﻿#include "SOSH/API.h"
 
 int Sub(int a, int b) {
     return a - b;
-}
+};
 
-TEST(SOSHInterpreterTest, evaluate_ReturnsCorrectResult) {
+int main() {
     SOSH_Function<int, int, int> sub_func("sub", Sub);
     sub_func.AddArgs(Token_t::SOSH_INT);
     sub_func.AddArgs(Token_t::SOSH_INT);
@@ -16,8 +15,10 @@ TEST(SOSHInterpreterTest, evaluate_ReturnsCorrectResult) {
     shell.AddFunction(sub_func_base);
 
     SOSH_Token result(Token_t::SOSH_UNDEFINED, "Empty.");
-    std::string input = "sub 6 3";
+    std::string input = "sub 6 -3";
     result = SOSH_Interpreter::evaluate(input, shell);
 
-    EXPECT_EQ(result.GetValue<int>(), 3);
-}
+    std::cout << "Result: " << result.GetValue() << std::endl;
+
+    return 0;
+};

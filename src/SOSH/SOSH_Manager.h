@@ -1,15 +1,8 @@
 #ifndef SOSH_MANAGER_H
 #define SOSH_MANAGER_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <regex>
-#include <sstream>
-
 #include "SOSH_Shell.h"
 #include "SOSH_Interpreter.h"
-
 
 /**
  * @file SOSH_Manager.h
@@ -21,10 +14,7 @@
  * @brief Класс, отвечающий за управление несколькими экземплярами класса SOSH_Shell.
  */
 class SOSH_Manager {
-private:
-    std::vector<SOSH_Shell> shell_pool; // Пулл экземпляров класса SOSH_Shell.
 public:
-
 	/**
      * @brief Добавляет экземпляр класса SOSH_Shell в пулл.
      * @param s Ссылка на экземпляр класса SOSH_Shell для добавления.
@@ -44,6 +34,9 @@ public:
      * @return Список экземпляров класса SOSH_Shell в пулле.
      */
     std::vector<SOSH_Shell> ListShell(); 
+
+private:
+    std::vector<SOSH_Shell> shell_pool; // Пулл экземпляров класса SOSH_Shell.
 };
 
 #endif // SOSH_MANAGER_H

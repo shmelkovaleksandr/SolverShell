@@ -1,35 +1,26 @@
 #ifndef SOSH_LEXER_H
 #define SOSH_LEXER_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <regex>
-#include <stack>
-#include <stdexcept>
-
 #include "SOSH_Token.h"
 #include "SOSH_Shell.h"
 
-
 /**
- * @file Interpreter.h
- * @brief Объявление класса Interpreter
+ * @file SOSH_Lexer.h
+ * @brief Объявление класса SOSH_Lexer
  */
 
 /**
- * @class Lexer
+ * @class SOSH_Lexer
  * @brief Класс, выполняющий лексический анализ и разделение кода на токены.
  */
-class Lexer {
+class SOSH_Lexer {
 public:
     /**
-     * @brief Конструктор класса Lexer.
+     * @brief Конструктор класса SOSH_Lexer.
      * @param code Код, который требуется проанализировать.
      * @param shell Объект класса SOSH_Shell, используемый для поиска функций.
      */
-    Lexer::Lexer(const std::string& code, SOSH_Shell shell = SOSH_Shell("")) : code(code), currentPosition(0), shell(shell) {};
+    SOSH_Lexer::SOSH_Lexer(const std::string& code, SOSH_Shell shell = SOSH_Shell("")) : code(code), currentPosition(0), shell(shell) {};
 
     /**
      * @brief Метод для выполнения лексического анализа кода.

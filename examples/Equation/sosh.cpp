@@ -71,7 +71,7 @@ int main() {
             continue;
         };
 
-        result = Interpreter::evaluate(input, BaseEqsCounter);
+        result = SOSH_Interpreter::evaluate(input, BaseEqsCounter);
     };
 
     return 0;

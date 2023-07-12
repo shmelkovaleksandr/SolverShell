@@ -15,5 +15,6 @@ add_subdirectory(test)
 add_subdirectory(lib/googletest)
 add_subdirectory(examples/Equation)
 add_subdirectory(examples/3DShapeGenerator)
+add_subdirectory(examples/SimpleExample)
 
 install(TARGETS ${CMAKE_PROJECT_NAME}_run ${CMAKE_PROJECT_NAME}_SharedLib DESTINATION ${CMAKE_CURRENT_LIST_DIR}/bin)

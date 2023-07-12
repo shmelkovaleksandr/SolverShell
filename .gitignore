@@ -1,0 +1,9 @@
+# Folders
+CMakeFiles/
+Debug/
+test.dir/
+x64/
+.vscode/
+build/
+
+# Files

@@ -1,7 +1,10 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_test)
 add_executable(${BINARY} 
     gtest.cpp
+    SOSH_AST_Tests.cpp
     SOSH_Function_Tests.cpp
+    SOSH_Interpreter_Tests.cpp
+    SOSH_Lexer_Tests.cpp
     SOSH_Manager_Tests.cpp
     SOSH_Parser_Tests.cpp
     SOSH_Shell_Tests.cpp
