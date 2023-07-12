@@ -19,8 +19,10 @@
 ## Установка
 
 ```shell
-git clone https://github.com/your-username/SolverShell.git
+git clone https://github.com/shmelkovaleksandr/SolverShell.git
 cd SolverShell
+git submodule init
+git submodule update
 mkdir build && cd build
 cmake ..
 make
@@ -53,6 +55,7 @@ int main() {
     // Интерпретация кода на предметно-ориентированном языке
     result = SOSH_Interpreter::evaluate(input, shell);
 
+    // Вывод результата
     std::cout << "Result: " << result.GetValue() << std::endl;
 
     return 0;
